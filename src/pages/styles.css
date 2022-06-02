@@ -1,0 +1,35 @@
+/* Vertical Rhythm - tile.css */
+:root {
+    --tile: 20px;
+}
+
+* {
+    font-size: calc(
+        0.655 * var(--tile) * var(--tile-count, 1)
+    );
+    line-height: calc(
+        var(--tile) * var(--tile-count, 1) * var(--tile-factor, 1)
+    );
+}
+
+
+:root {
+    /* Colours */
+    --heading: #5045CD;
+    --accent: #A8B6FF;
+    --background: #F5F8FA;
+    --foreground: #FFFFFF;
+
+    /* box-shadow: 0px 4px 24px rgba(11, 15, 103, 0.2), 0px 2px 4px rgba(11, 15, 103, 0.06), 0px 4px 12px rgba(11, 15, 103, 0.04); */
+    --border-radius: calc(var(--tile) / 2);
+
+    background: var(--background);
+
+}
+
+
+/* Body */
+
+body, html {
+    font-family: Arial, sans-serif;
+}

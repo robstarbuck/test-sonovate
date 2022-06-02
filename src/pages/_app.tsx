@@ -7,6 +7,7 @@ import {
   createHttpLink,
   InMemoryCache,
 } from '@apollo/client';
+import './styles.css'
 
 let apolloClient: ApolloClient<any>;
 
