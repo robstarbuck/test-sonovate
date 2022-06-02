@@ -2,52 +2,72 @@ import Link from "next/link";
 import { ReactNode } from "react";
 import styled, { CSSProperties } from "styled-components";
 
-type BlogPostCardProps = {
+type CardProps = {
   loading?: boolean;
   style?: CSSProperties;
-  linkTo?: string;
   children?: ReactNode;
+  interactive?: boolean;
 };
 
-export const Card = (props: BlogPostCardProps) => {
-  const { style, children, linkTo, loading = false } = props;
+export const Card = (props: CardProps) => {
+  const { style, children, loading = false, interactive = false } = props;
   return (
-    <Container loading={loading} style={style}>
-      <Content loading={loading}>
-        {children}
-        {linkTo && (
-          <LinkFooter>
-            <Link href={linkTo}>→</Link>
-          </LinkFooter>
-        )}
-      </Content>
+    <Container loading={loading} style={style} interactive={interactive}>
+      <Content loading={loading}>{children}</Content>
     </Container>
   );
 };
 
-const Content = styled.div<BlogPostCardProps>`
-  opacity: ${(props) => props.loading ? '0' : '1'};
-  transform: ${(props) => props.loading ? 'translateY(4px)' : 'translateY(0)'};
+type CardLinkProps = CardProps & { linkTo: string };
+
+export const CardLink = (props: CardLinkProps) => {
+  const { linkTo, children, ...cardProps } = props;
+
+  return (
+    <Link href={linkTo} passHref>
+      <a style={{ all: "unset" }}>
+        <Card {...cardProps} interactive={true}>
+          <div style={{ padding: "var(--tile)" }}>{children}</div>
+          <LinkFooter>
+            <Arrow />
+          </LinkFooter>
+        </Card>
+      </a>
+    </Link>
+  );
+};
+
+const Content = styled.div<CardProps>`
+  opacity: ${(props) => (props.loading ? "0" : "1")};
+  height: inherit;
+  transform: ${(props) =>
+    props.loading ? "translateY(4px)" : "translateY(0)"};
   transition: opacity 500ms, transform 500ms;
 `;
 
-const Container = styled.div<BlogPostCardProps>`
+type ContainerProps = {
+  interactive?: boolean;
+  loading?: boolean;
+};
+
+const Container = styled.div<ContainerProps>`
   display: block;
   border: 2px solid transparent;
-  padding: calc(var(--tile) - 2px);
   overflow: hidden;
   position: relative;
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow-far);
+  box-shadow: var(--shadow-when-far);
   transition: all 250ms;
   background: ${(props) => (props.loading ? "#0B0F670A" : "var(--foreground)")};
-  :hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-near);
-  }
-  :focus {
-    outline: unset;
-    border: 2px solid var(--accent);
+  @media ${({ interactive }) => (interactive ? "all" : "not all")} {
+    :hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-when-close);
+    }
+    :focus {
+      outline: unset;
+      border: 2px solid var(--accent);
+    }
   }
 `;
 
@@ -59,4 +79,23 @@ const LinkFooter = styled.footer`
   display: flex;
   flex-direction: row-reverse;
   padding: var(--tile);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+`;
+
+const Arrow = styled.button`
+  all: unset;
+  width: calc(var(--tile) * 2);
+  height: calc(var(--tile) * 2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 150%;
+  ::before {
+    content: "→";
+    display: inline;
+  }
 `;

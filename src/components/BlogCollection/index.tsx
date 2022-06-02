@@ -1,15 +1,10 @@
 import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import styled from "styled-components";
-import { Card } from "../Card";
+import { BlogPostItem } from "../../pages/[id]";
+import { CardLink } from "../Card";
+import PageError from "../PageError";
 import { Title } from "../Title";
-
-type BlogPostItem = {
-  sys: { id: string };
-  title: string;
-  preface: string;
-  body: string;
-};
 
 type BlogPostCollection = {
   blogPostCollection: {
@@ -29,26 +24,27 @@ export const BlogCollection = () => {
 
   return (
     <Container>
+      {error && <PageError error={error}/>}
       {itemsOrSkeleton?.map((item, i) => {
         const isWide = i % 5 === 0;
         const key = i;
         const width = `var(--${isWide ? "wide" : "slim"})`;
         return (
           <div style={{ width }}>
-            <Card
+            <CardLink
               key={key}
               loading={loading}
-              linkTo={item?.sys.id}
+              linkTo={item?.sys.id || "#"}
               style={{
-                margin: "calc(var(--tile) / 2)",
-                height: "400px",
+                height: "calc(var(--tile) * 21)",
+                margin: "var(--half-tile)",
               }}
             >
               <>
                 <Title size="medium">{item?.title}</Title>
                 {item?.body}
               </>
-            </Card>
+            </CardLink>
           </div>
         );
       })}

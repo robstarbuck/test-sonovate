@@ -14,7 +14,7 @@ const defaultSize: Size = "medium";
 const TitleElement = styled.h1<{ size: TitleProps["size"] }>`
   color: var(--heading);
   margin: 0;
-  padding-bottom: calc(var(--tile) / 2);
+  padding-bottom: var(--half-tile);
   --tile-count: ${({ size }) => sizeToTileCount(size ?? defaultSize)};
   --tile-factor: ${({ size }) => sizeToTileFactor(size ?? defaultSize)};
 `;

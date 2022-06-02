@@ -1,6 +1,7 @@
 /* Vertical Rhythm - tile.css */
 :root {
     --tile: 20px;
+    --half-tile: calc(var(--tile) / 2);
 }
 
 * {
@@ -20,8 +21,9 @@
     --background: #F5F8FA;
     --foreground: #FFFFFF;
 
-    /* box-shadow: 0px 4px 24px rgba(11, 15, 103, 0.2), 0px 2px 4px rgba(11, 15, 103, 0.06), 0px 4px 12px rgba(11, 15, 103, 0.04); */
-    --border-radius: calc(var(--tile) / 2);
+    --shadow-when-far: 0px 2px 4px rgba(11, 15, 103, 0.06), 0px 4px 12px rgba(11, 15, 103, 0.04);
+    --shadow-when-close: 0px 4px 24px rgba(11, 15, 103, 0.2), 0px 2px 4px rgba(11, 15, 103, 0.06), 0px 4px 12px rgba(11, 15, 103, 0.04);
+    --border-radius: var(--half-tile);
 
     background: var(--background);
 
