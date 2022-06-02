@@ -18,8 +18,6 @@ export default function BlogPage() {
     skip: singleId === undefined,
   });
 
-  console.log({ data });
-
   return (
     <Layout.Trunk>
       <Layout.Content>
