@@ -5,12 +5,8 @@
 }
 
 * {
-    font-size: calc(
-        0.655 * var(--tile) * var(--tile-count, 1)
-    );
-    line-height: calc(
-        var(--tile) * var(--tile-count, 1) * var(--tile-factor, 1)
-    );
+    font-size: calc(0.655 * var(--tile) * var(--tile-count, 1));
+    line-height: calc(var(--tile) * var(--tile-count, 1) * var(--tile-factor, 1));
 }
 
 
@@ -32,6 +28,7 @@
 
 /* Body */
 
-body, html {
+body,
+html {
     font-family: Arial, sans-serif;
 }

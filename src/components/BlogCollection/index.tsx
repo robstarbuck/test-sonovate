@@ -5,25 +5,21 @@ import { CardLink } from "../Card";
 import PageError from "../PageError";
 import { Title } from "../Title";
 
-
-
-// https://graphql.contentful.com/content/v1/spaces/jgxvzzx7ps77/explore?access_token=AEf7QMYxPL9rGzq0iYw8vNWzbRvGEhLrtPXHYWYYE_I
-
 type BlogCollectionProps = {
   items?: ReadonlyArray<BlogPostItem>;
   loading?: boolean;
   error?: ApolloError;
-}
+};
 
 export const BlogCollection = (props: BlogCollectionProps) => {
-  const {items, error, loading} = props;
+  const { items, error, loading } = props;
 
   const skeleton = Array<undefined>(10).fill(undefined);
   const itemsOrSkeleton = loading ? skeleton : items;
 
   return (
     <Container>
-      {error && <PageError error={error}/>}
+      {error && <PageError error={error} />}
       {itemsOrSkeleton?.map((item, i) => {
         const isWide = i % 5 === 0;
         const key = i;
@@ -50,8 +46,6 @@ export const BlogCollection = (props: BlogCollectionProps) => {
     </Container>
   );
 };
-
-
 
 const Container = styled.div`
   --slim: 33.33%;

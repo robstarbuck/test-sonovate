@@ -26,7 +26,7 @@ export const CardLink = (props: CardLinkProps) => {
   return (
     <Link href={linkTo} passHref>
       <a style={{ all: "unset" }}>
-        <Card {...cardProps} interactive={true}>
+        <Card interactive={true} {...cardProps}>
           <div style={{ padding: "var(--tile)" }}>{children}</div>
           <LinkFooter>
             <Arrow />
@@ -37,7 +37,12 @@ export const CardLink = (props: CardLinkProps) => {
   );
 };
 
-const Content = styled.div<CardProps>`
+type StyledProps = {
+  interactive?: boolean;
+  loading?: boolean;
+};
+
+const Content = styled.div<StyledProps>`
   opacity: ${(props) => (props.loading ? "0" : "1")};
   height: inherit;
   transform: ${(props) =>
@@ -45,12 +50,7 @@ const Content = styled.div<CardProps>`
   transition: opacity 500ms, transform 500ms;
 `;
 
-type ContainerProps = {
-  interactive?: boolean;
-  loading?: boolean;
-};
-
-const Container = styled.div<ContainerProps>`
+const Container = styled.div<StyledProps>`
   display: block;
   overflow: hidden;
   position: relative;

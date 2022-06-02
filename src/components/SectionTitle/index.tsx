@@ -2,11 +2,11 @@ import { ReactNode } from "react";
 import styled, { CSSProperties } from "styled-components";
 import { Title } from "../Title";
 
-type PageTitleProps = {
+type SectionTitleProps = {
   children?: ReactNode;
 };
 
-export function SectionTitle(props: PageTitleProps) {
+export function SectionTitle(props: SectionTitleProps) {
   const { children } = props;
   return (
     <TitleSeparator style={titleStyle}>

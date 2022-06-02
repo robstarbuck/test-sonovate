@@ -12,8 +12,6 @@ const Trunk = styled.main`
 `;
 
 export const Layout = {
-    Trunk,
-    Content
-}
-
-
+  Trunk,
+  Content,
+};

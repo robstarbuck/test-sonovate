@@ -10,13 +10,13 @@ export default function BlogPage() {
   const { id: queryId } = router.query;
   const singleId = Array.isArray(queryId) ? queryId.at(0) : queryId;
 
-  const { data, loading } = useQuery<{blogPost: BlogPostItem}, { id: string }>(
-    BLOG_POST_QUERY,
-    {
-      variables: { id: singleId ?? "" },
-      skip: singleId === undefined,
-    }
-  );
+  const { data, loading } = useQuery<
+    { blogPost: BlogPostItem },
+    { id: string }
+  >(BLOG_POST_QUERY, {
+    variables: { id: singleId ?? "" },
+    skip: singleId === undefined,
+  });
 
   console.log({ data });
 
