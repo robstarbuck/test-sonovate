@@ -52,7 +52,6 @@ type ContainerProps = {
 
 const Container = styled.div<ContainerProps>`
   display: block;
-  border: 2px solid transparent;
   overflow: hidden;
   position: relative;
   border-radius: var(--border-radius);
@@ -60,13 +59,10 @@ const Container = styled.div<ContainerProps>`
   transition: all 250ms;
   background: ${(props) => (props.loading ? "#0B0F670A" : "var(--foreground)")};
   @media ${({ interactive }) => (interactive ? "all" : "not all")} {
+    cursor: pointer;
     :hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-when-close);
-    }
-    :focus {
-      outline: unset;
-      border: 2px solid var(--accent);
     }
   }
 `;
@@ -88,6 +84,7 @@ const LinkFooter = styled.footer`
 
 const Arrow = styled.button`
   all: unset;
+  color: var(--heading);
   width: calc(var(--tile) * 2);
   height: calc(var(--tile) * 2);
   display: flex;
